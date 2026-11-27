@@ -1,4 +1,4 @@
-#
+#one hot encoding used this tutorial: https://www.youtube.com/watch?v=rsyrZnZ8J2o
 """Step 2: Data Preparation.
 
 Encodes the target variable, engineers domain features, one-hot encodes
