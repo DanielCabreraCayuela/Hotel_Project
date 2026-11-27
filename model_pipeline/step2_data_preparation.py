@@ -15,9 +15,13 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 
-from step1_data_understanding import DATA_PATH, PROJECT_DIR, load_raw_data
+from step1_data_understanding import (
+    ARTIFACTS_DIR,
+    DATA_PATH,
+    FIGURES_DIR,
+    load_raw_data,
+)
 
-ARTIFACTS_DIR = PROJECT_DIR / "artifacts"
 PREPARED_DATA_PATH = ARTIFACTS_DIR / "prepared_data.joblib"
 
 CATEGORICAL_COLS = [
@@ -127,7 +131,8 @@ def _plot_correlation_bar(
     ax.spines["right"].set_visible(False)
 
     plt.tight_layout()
-    fig.savefig(PROJECT_DIR / output_filename, dpi=300, bbox_inches="tight")
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+    fig.savefig(FIGURES_DIR / output_filename, dpi=300, bbox_inches="tight")
     if show_plots:
         plt.show()
     plt.close(fig)

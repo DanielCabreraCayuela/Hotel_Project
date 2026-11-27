@@ -12,8 +12,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-PROJECT_DIR = Path(__file__).resolve().parent
-DATA_PATH = PROJECT_DIR / "Hotel Reservations.csv"
+PROJECT_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = PROJECT_DIR / "data" / "Hotel Reservations.csv"
+OUTPUT_DIR = PROJECT_DIR / "output"
+FIGURES_DIR = OUTPUT_DIR / "figures"
+ARTIFACTS_DIR = OUTPUT_DIR / "artifacts"
 
 
 def load_raw_data(csv_path: Path = DATA_PATH) -> pd.DataFrame:
@@ -87,7 +90,8 @@ def plot_exploratory_charts(df: pd.DataFrame, show_plots: bool = True) -> None:
     ax.set_title("Class Imbalance of Booking Cancellations")
     ax.set_xlabel("Cancelled (0 or 1)")
     ax.grid(False)
-    fig.savefig(PROJECT_DIR / "class_label_distribution.png")
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+    fig.savefig(FIGURES_DIR / "class_label_distribution.png")
     if show_plots:
         plt.show()
     plt.close(fig)

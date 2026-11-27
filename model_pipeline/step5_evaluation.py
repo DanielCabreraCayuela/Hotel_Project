@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from step1_data_understanding import PROJECT_DIR
+from step1_data_understanding import FIGURES_DIR
 from step2_data_preparation import PREPARED_DATA_PATH
 from step3_data_modeling import TRAINED_MODELS_PATH
 from step4_data_testing import TEST_RESULTS_PATH
@@ -243,8 +243,9 @@ def evaluate_diminishing_returns_cutoff(
         ax.spines["right"].set_visible(False)
 
     plt.tight_layout()
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     fig.savefig(
-        PROJECT_DIR / "subquestion2_diminishing_returns.png",
+        FIGURES_DIR / "subquestion2_diminishing_returns.png",
         dpi=300,
         bbox_inches="tight",
     )
