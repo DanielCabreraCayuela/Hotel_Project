@@ -1,11 +1,3 @@
-"""Code behind the business understanding slide (3) and the data understanding slide (4) - Wil
-Group 9 - Data Science and AI for Business.
-Run from the root of the repository, with "Hotel Reservations.csv" next to this file
-(or change DATA_PATH below). The "# %%" lines split the file into cells, like in Colab.
-Each comment says what the line does -> [which number or chart on the slides it gives].
-This is AI generated code! (Claude)
-"""
-
 # %% Load the data
 import pandas as pd                                                           # tables
 import matplotlib.pyplot as plt                                               # charts
