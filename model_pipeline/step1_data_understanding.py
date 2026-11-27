@@ -1,4 +1,5 @@
-#Code written by Naoufal, edited by Daniel using LLM and restructred to be divided into functions for better modularity and reusability.
+#Code written by Naoufal, edited by Daniel for better visualization for the report using LLM 
+#restructred to be divided into functions for better modularity and reusability.
 """Step 1: Data Understanding.
 
 Loads the raw hotel reservations dataset, checks data quality (summary
@@ -26,6 +27,7 @@ def load_raw_data(csv_path: Path = DATA_PATH) -> pd.DataFrame:
     return df
 
 #number and % of cancellations
+#Code taken from Naoufal's bachelor thesis, adapted for this dataset
 def _plot_cancellation_rate_bar(
     df: pd.DataFrame,
     group_col: str,
@@ -136,6 +138,48 @@ def plot_exploratory_charts(df: pd.DataFrame, show_plots: bool = True) -> None:
         sort_descending=True,
         show_plots=show_plots,
     )
+
+    plot_correlation_matrix(df, show_plots=show_plots)
+
+#Code written by Naoufal, edited by Daniel for better visualization for the report using LLM
+def plot_correlation_matrix(df: pd.DataFrame, show_plots: bool = True) -> None:
+    """Plot and save a Pearson correlation matrix heatmap for numerical features."""
+    # Correlation matrix and heatmap between variables
+    numerical_cols = [
+        "booking_status",
+        "no_of_adults",
+        "no_of_children",
+        "no_of_weekend_nights",
+        "no_of_week_nights",
+        "lead_time",
+        "no_of_previous_cancellations",
+        "no_of_previous_bookings_not_canceled",
+        "avg_price_per_room",
+        "no_of_special_requests",
+    ]
+    correlation_matrix = df[numerical_cols].corr()
+
+    with plt.rc_context({"font.size": 12}):
+        fig, ax = plt.subplots(figsize=(10, 8))
+        sns.heatmap(
+            correlation_matrix,
+            cmap="viridis",
+            vmin=-1,
+            vmax=1,
+            center=0,
+            annot=True,
+            fmt=".2f",
+            square=True,
+            linewidths=0.5,
+            ax=ax,
+        )
+        ax.set_title("Correlation Matrix of Numerical Features")
+        plt.tight_layout()
+        FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+        fig.savefig(FIGURES_DIR / "correlation_matrix.png", dpi=300, bbox_inches="tight")
+        if show_plots:
+            plt.show()
+        plt.close(fig)
 
 
 def run_data_understanding(
